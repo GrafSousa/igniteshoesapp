@@ -1,6 +1,11 @@
+import { useEffect } from 'react';
 import { StatusBar } from 'react-native';
 import { NativeBaseProvider } from 'native-base';
-import { LogLevel, OneSignal } from 'react-native-onesignal';
+import {
+  LogLevel,
+  NotificationClickEvent,
+  OneSignal,
+} from 'react-native-onesignal';
 
 import {
   useFonts,
@@ -24,6 +29,32 @@ export default function App() {
   const [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_700Bold });
 
   tagUserInfoCreate();
+
+  const handleNotificationClick = (event: NotificationClickEvent) => {
+    const { actionId } = event.result;
+
+    switch (actionId) {
+      case '1':
+        console.log('Ver todos');
+        break;
+      case '2':
+        console.log('Ver pedido');
+        break;
+      default:
+        console.log('Nenhum botão de ação selecionado');
+        break;
+    }
+  };
+
+  useEffect(() => {
+    OneSignal.Notifications.addEventListener('click', handleNotificationClick);
+
+    return () =>
+      OneSignal.Notifications.removeEventListener(
+        'click',
+        handleNotificationClick
+      );
+  }, []);
 
   return (
     <NativeBaseProvider theme={THEME}>
