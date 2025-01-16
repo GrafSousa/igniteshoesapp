@@ -14,6 +14,7 @@ import { THEME } from './src/theme';
 import { Loading } from './src/components/Loading';
 
 import { CartContextProvider } from './src/contexts/CartContext';
+import { tagUserInfoCreate } from './src/notifications/notificationTags';
 
 OneSignal.Debug.setLogLevel(LogLevel.Verbose);
 OneSignal.initialize(process.env.ONESIGNAL_APP_ID ?? '');
@@ -21,6 +22,8 @@ OneSignal.Notifications.requestPermission(true);
 
 export default function App() {
   const [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_700Bold });
+
+  tagUserInfoCreate();
 
   return (
     <NativeBaseProvider theme={THEME}>
