@@ -25,7 +25,14 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
+          <string>igniteshoes</string>
           <string>com.igniteshoes</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>exp+igniteshoes</string>
         </array>
       </dict>
     </array>
